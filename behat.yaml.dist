@@ -1,0 +1,13 @@
+imports:
+    - 'tests/Behat/Resources/config/suites.yaml'
+
+default:
+    extensions:
+        FriendsOfBehat\VariadicExtension: ~
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                class: 'App\Infrastructure\Kernel'
+                path: 'src/Infrastructure/Kernel.php'
+                debug: true
+    formatters:
+        progress: ~

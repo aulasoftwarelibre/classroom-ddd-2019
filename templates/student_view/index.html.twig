@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudentView index{% endblock %}
+
+{% block body %}
+    <h1>StudentView index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CardNumber</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Age</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student_view in student_views %}
+            <tr>
+                <td>{{ student_view.cardNumber }}</td>
+                <td>{{ student_view.firstName }}</td>
+                <td>{{ student_view.lastName }}</td>
+                <td>{{ student_view.age }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('student_view_show', {'id': student_view.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-default" href="{{ path('student_view_new') }}">Create new</a>
+{% endblock %}

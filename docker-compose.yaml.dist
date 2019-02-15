@@ -1,0 +1,44 @@
+version: '3'
+services:
+    database:
+        image: 'postgres:10'
+        ports:
+            - 32769:5432
+        volumes:
+            - './vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d'
+            - './var/run/postgresql:/run/postgresql'
+        env_file:
+            - '.env' # change to your local .env file
+        environment:
+            - 'POSTGRES_USER'
+            - 'POSTGRES_PASSWORD'
+
+    projection_professor:
+        image: prooph/php:7.2-cli
+        entrypoint:
+            - /app/docker/bin/wait_for_db.sh
+        volumes:
+            - .:/app
+        depends_on:
+            - database
+        command: php bin/console event-store:projection:run professor_projection
+
+    projection_student:
+        image: prooph/php:7.2-cli
+        entrypoint:
+            - /app/docker/bin/wait_for_db.sh
+        volumes:
+            - .:/app
+        depends_on:
+            - database
+        command: php bin/console event-store:projection:run student_projection
+
+    projection_group:
+        image: prooph/php:7.2-cli
+        entrypoint:
+            - /app/docker/bin/wait_for_db.sh
+        volumes:
+            - .:/app
+        depends_on:
+            - database
+        command: php bin/console event-store:projection:run group_projection

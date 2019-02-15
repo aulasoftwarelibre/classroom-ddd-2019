@@ -1,0 +1,6 @@
+framework:
+    messenger:
+        buses:
+            messenger.bus.events:
+                middleware:
+                    - 'aulasl.messenger_middleware.event_collector_plugin'

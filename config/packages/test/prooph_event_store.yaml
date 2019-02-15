@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        public: true
+
+    ## In memory read model repositories
+    App\Tests\Behat\Repository\:
+        resource: '%kernel.project_dir%/tests/Behat/Repository'
+
+    # Repositories
+
+    ## Read model
+    App\Infrastructure\ReadModel\Repository\ProfessorViews: '@App\Tests\Behat\Repository\ProfessorViewsInMemoryRepository'

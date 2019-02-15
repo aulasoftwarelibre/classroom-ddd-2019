@@ -1,0 +1,11 @@
+default:
+    suites:
+        domain_professor:
+            contexts:
+                - 'tests.behat.context.domain.professor'
+
+                - 'tests.behat.context.hook.prooph'
+                - 'tests.behat.context.hook.database'
+            filters:
+                tags: '@professor && @domain'
+

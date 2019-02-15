@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudentView{% endblock %}
+
+{% block body %}
+    <h1>StudentView</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CardNumber</th>
+                <td>{{ student_view.cardNumber }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ student_view.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ student_view.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ student_view.age }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('student_view_index') }}">back to list</a>
+
+    {{ include('student_view/_delete_form.html.twig') }}
+{% endblock %}

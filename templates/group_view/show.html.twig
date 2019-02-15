@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GroupView{% endblock %}
+
+{% block body %}
+    <h1>GroupView</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ group_view.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('group_view_index') }}">back to list</a>
+    <a class="btn btn-secondary" href="{{ path('group_view_member_add', {'id': group_view.id}) }}">add member</a>
+
+
+    {{ include('group_view/_delete_form.html.twig') }}
+{% endblock %}

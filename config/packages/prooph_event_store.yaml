@@ -1,0 +1,44 @@
+prooph_event_store:
+    stores:
+        default:
+            event_store: 'Prooph\EventStore\EventStore'
+            repositories:
+                App\Infrastructure\EventStore\ProfessorsEventStore:
+                    aggregate_type: 'App\Domain\Professor\Model\Professor'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                App\Infrastructure\EventStore\StudentsEventStore:
+                    aggregate_type: 'App\Domain\Student\Model\Student'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                App\Infrastructure\EventStore\GroupsEventStore:
+                    aggregate_type: 'App\Domain\Group\Model\Group'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+    projection_managers:
+        classroom_projection_manager:
+            event_store: 'Prooph\EventStore\EventStore'
+            connection: 'doctrine.pdo.connection'
+            projections:
+                professor_projection:
+                    read_model: App\Infrastructure\ReadModel\Projection\ProfessorReadModel
+                    projection: App\Infrastructure\ReadModel\Projection\ProfessorProjection
+                student_projection:
+                    read_model: App\Infrastructure\ReadModel\Projection\StudentReadModel
+                    projection: App\Infrastructure\ReadModel\Projection\StudentProjection
+                group_projection:
+                    read_model: App\Infrastructure\ReadModel\Projection\GroupReadModel
+                    projection: App\Infrastructure\ReadModel\Projection\GroupProjection
+
+services:
+    _defaults:
+        public: true
+
+    # Repositories
+
+    ## Write model
+    App\Domain\Professor\Repository\Professors: '@App\Infrastructure\EventStore\ProfessorsEventStore'
+    App\Domain\Student\Repository\Students: '@App\Infrastructure\EventStore\StudentsEventStore'
+    App\Domain\Group\Repository\Groups: '@App\Infrastructure\EventStore\GroupsEventStore'
+
+    ## Read model
+    App\Infrastructure\ReadModel\Repository\ProfessorViews: '@App\Infrastructure\Repository\ProfessorViewsRepository'
+    App\Infrastructure\ReadModel\Repository\StudentViews: '@App\Infrastructure\Repository\StudentViewsRepository'
+    App\Infrastructure\ReadModel\Repository\GroupViews: '@App\Infrastructure\Repository\GroupViewsRepository'

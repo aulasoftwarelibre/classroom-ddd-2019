@@ -1,0 +1,16 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+
+parameters:
+    reportUnmatchedIgnoredErrors: false
+
+    symfony:
+        container_xml_path: var/cache/test/InfrastructureApp_Infrastructure_KernelTestDebugContainer.xml
+
+    ignoreErrors:
+        - '/EventStore::find[^\s]+ should return [\\\w]+\|null but returns object\|null/'
+
+    excludes_analyse:
+        - '**/Migrations/**.php'
+

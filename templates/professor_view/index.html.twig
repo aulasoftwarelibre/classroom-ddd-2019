@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProfessorView index{% endblock %}
+
+{% block body %}
+    <h1>ProfessorView index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Roles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for professor_view in professor_views %}
+            <tr>
+                <td>{{ professor_view.username }}</td>
+                <td>{{ professor_view.roles ? professor_view.roles|json_encode : '' }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('professor_view_show', {'id': professor_view.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('professor_view_new') }}">Create new</a>
+{% endblock %}

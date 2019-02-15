@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="tests.behat.context.domain.professor" class="App\Tests\Behat\Context\Domain\ProfessorContext">
+            <argument type="service" id="messenger.bus.commands" />
+            <argument type="service" id="aulasl.messenger_middleware.event_collector_plugin" />
+            <argument type="service" id="App\Infrastructure\EventStore\ProfessorsEventStore"/>
+        </service>
+    </services>
+</container>

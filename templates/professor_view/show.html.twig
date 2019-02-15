@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProfessorView{% endblock %}
+
+{% block body %}
+    <h1>ProfessorView</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ professor_view.id }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ professor_view.username }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ professor_view.roles ? professor_view.roles|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('professor_view_index') }}">back to list</a>
+
+{% endblock %}

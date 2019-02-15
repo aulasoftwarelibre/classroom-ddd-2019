@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GroupView index{% endblock %}
+
+{% block body %}
+    <h1>GroupView index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Members</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group_view in group_views %}
+            <tr>
+                <td>{{ group_view.name }}</td>
+                <td>{{ group_view.count }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('group_view_show', {'id': group_view.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-default" href="{{ path('group_view_new') }}">Create new</a>
+{% endblock %}
